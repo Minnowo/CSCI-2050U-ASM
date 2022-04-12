@@ -8,9 +8,18 @@ section .bss
     
 
 section .data 
+<<<<<<< HEAD
     prompt db "Enter a number: ", 0
     getDigit db "%lli", 0
     displayStr db "[%lli] = %lli", 0ah, 0dh, 0
+=======
+    A dq 0 
+    B dq 1
+    count dq 0
+    prompt db "Enter a number: ", 0
+    getDigit db "%d", 0
+    displayStr db "[%d] = %d", 0ah, 0dh, 0
+>>>>>>> 1ad213e6fdf4b83c2b4f6206875ef25d7e6800dc
 
 section .text 
 
@@ -30,6 +39,7 @@ main:
 
     ; calc the nth fib number 
     
+<<<<<<< HEAD
     mov rdx, [input] ; n
     mov rax, 0       ; count
     mov r11, 0       ; previous
@@ -62,4 +72,34 @@ main:
         pop rbx 
 
     exitProgram:
+=======
+    mov rcx, [count]
+    loopStart:
+        cmp rcx, [input]    
+        ja endLoop     ; rcx >= input then end loop  
+
+        ; display [count] = [A]
+        mov rdi, displayStr
+        mov rsi, [count]
+        mov rdx, [A]
+        push rbx 
+        call printf
+        pop rbx 
+
+        mov rdx, [A]    ; rdx = A
+        add rdx, [B]    ; rdx += B 
+
+        mov rax, [B]
+        mov [A], rax    ; A = B
+        mov [B], rdx    ; B = RDX
+
+        ; increment count by 1
+        mov rcx, [count]
+        inc rcx          
+        mov [count], rcx
+
+        jmp loopStart    ; start loop again 
+
+    endLoop:
+>>>>>>> 1ad213e6fdf4b83c2b4f6206875ef25d7e6800dc
     ret 
