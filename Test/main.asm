@@ -7,7 +7,7 @@ global main
 section .text
 
 main:
-
+  mov rcd, 5
   mov r8, 5
   mov r9, 10
 
